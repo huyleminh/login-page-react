@@ -1,0 +1,25 @@
+{
+    "admin" : {
+        "info" : [
+            {"userName":"Admin","password":"123456"}
+        ],
+
+        "path" : ["/manager","/information","/products", "/", "/login"]
+    },
+
+    "user" : {
+        "info" : [
+            {"userName":"User","password":"123456"}
+        ],
+
+        "path" : ["/information","/products", "/", "/login"]
+    },
+
+    "guest" : {
+        "info" : [
+            {"userName":"Guest","password":"123456"}
+        ],
+        
+        "path" : ["/products", "/", "/login"]
+    }
+}
