@@ -1,0 +1,19 @@
+.bg-404 {
+    background-image: url('../image/404.jpg');
+    height: 650px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.go-back-button {
+    color: #111212;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px;
+    border-color: #f5f2f2;
+    width: 100px;
+    height: 50px;
+    background-color: #aed6e8;
+    margin: 30px 30px 30px 630px;
+}
