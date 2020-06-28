@@ -8,7 +8,7 @@ class Manager extends React.Component<IBaseProps, any> {
     render() {
         return(
             <div>
-                { Authenticated(this.props) }
+                {Authenticated(this.props)} 
                 <NavBar />
                 <h1> Manager </h1>
             </div>

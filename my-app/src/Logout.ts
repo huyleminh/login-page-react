@@ -1,7 +1,5 @@
-import { IBaseProps } from "./BaseInterface/BaseInterface"
-
-const Logout = (props: IBaseProps) => {
-    props.history.push("/")
+const Logout = () => {
+    localStorage.clear()
 }
 
 export default Logout;
