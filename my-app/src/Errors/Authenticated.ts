@@ -15,9 +15,10 @@ const Authenticated = (props: IBaseProps) => {
     }
     else {
         for (let i of data[role].path) {
-            console.log(i);
-            // nếu mà mình dùng history.push xong thì nó có trở về cái app.tsx để switch k 
-            // console.log(data[role].path[i] === props.location.pathname);
+            if (!data[role].path.includes(props.location.pathname)) {
+                props.history.push("/forbidden")
+                return;
+            }
         }
     }
 }
