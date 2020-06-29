@@ -3,6 +3,7 @@ import NavBar from "../NavBar";
 import { IBaseProps } from "../BaseInterface/BaseInterface";
 import Authenticated from "../Errors/Authenticated"
 
+
 class Information extends React.Component<IBaseProps, any> {
     render() {
         return(
