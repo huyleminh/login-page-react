@@ -13,7 +13,7 @@ class DashBoard extends React.Component<IBaseProps, any> {
                 <h1>WELLCOME</h1>
             </div>
         )
-    } //check coi thử cái path khi truyền vào đúng với path được quy định trong role hay k 
+    }
 }
 
 export default DashBoard;
