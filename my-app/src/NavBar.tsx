@@ -6,13 +6,8 @@ import { IBaseProps } from "./BaseInterface/BaseInterface";
 
 
 class NavBar extends React.Component<any, any> {
-    // constructor(props: IBaseProps) {
-    //     super(props);
-    // }
-
     handleLogOut = () => {
         localStorage.clear();
-        // this.props.history.push("/login")
     }
 
     render() {
@@ -23,7 +18,7 @@ class NavBar extends React.Component<any, any> {
                     <li> <NavLink className="nav-link" to="/information" activeClassName="selected">Information</NavLink> </li>
                     <li> <NavLink className="nav-link" to="/manager" activeClassName="selected">Manager</NavLink> </li>
                     <li> <NavLink className="nav-link" to="/products" activeClassName="selected">Products</NavLink> </li>
-                    <li style={{ float: "right" }}> <NavLink to="/login" onClick={this.handleLogOut}>Logout</NavLink></li>
+                    <li style={{ float: "right" }}> <NavLink className="nav-link" to="/login" onClick={this.handleLogOut}>Logout</NavLink></li>
                 </ul>
             </div>
         );
