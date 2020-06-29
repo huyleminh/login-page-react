@@ -15,7 +15,7 @@ class App extends React.Component {
   render() {
     return(
         <Switch>
-          <Route exact path="/login" component={Login} />
+          <Route path="/login" component={Login} />
           <Route path="/manager" component={Manager} />
           <Route path="/information" component={Information} />
           <Route path="/products" component={Products} />
