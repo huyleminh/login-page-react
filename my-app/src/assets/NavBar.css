@@ -1,28 +1,36 @@
-ul {
-    list-style-type: none;
+.layout-header {
+    border: 0px;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #007bff;
+    background-color: rgb(83, 86, 241);
 }
 
-li {
-    float: left;
-    display: block;
-    padding: 20px 30px;
+.nav-container-right  {
+    list-style-type: none;
+    display: flex;
+    margin: 0px;
+    padding: 0;
 }
 
-.nav-link {
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: normal;
+.nav-li {
+    height: 30px;
+    padding: 6px;
+}
+
+.nav-li:hover {
+    background-color: rgb(70, 72, 204);
+}
+
+.nav-li:hover {
+    width: fit-content;
 }
 
 .selected {
     font-weight: bold;
-    color: #ffffff;
 }
 
-#log-out {
-    float: right
+#nav-link {
+    color: #ffffff;
+    text-decoration: none;
 }
