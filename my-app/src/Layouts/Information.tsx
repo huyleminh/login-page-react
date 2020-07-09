@@ -1,16 +1,16 @@
 import React from "react";
 import NavBar from "../NavBar";
-import { IBaseProps } from "../BaseInterface/BaseInterface";
-import Authenticated from "../Errors/Authenticated"
+import "../assets/NavBar.css";
+import { IBaseProps } from "../BaseInterfaces/BaseInterface";
+
 
 
 class Information extends React.Component<IBaseProps, any> {
     render() {
         return(
             <div>
-                {Authenticated(this.props)}
                 <NavBar />
-                <h1>Information</h1>
+                <h1>Information page</h1>
             </div>
         );
     }
