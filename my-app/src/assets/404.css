@@ -1,19 +1,28 @@
 .bg-404 {
-    background-image: url('../image/404.jpg');
+    background-image: url('../Images/404.jpg');
     height: 650px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-.go-back-button {
-    color: #111212;
-    text-align: center;
+.btn-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.nav-button {
+    color: #ffffff;
+    font-size: 14px;
     border-radius: 5px;
-    border: 1px;
-    border-color: #f5f2f2;
+    border: 5px;
     width: 100px;
-    height: 50px;
-    background-color: #aed6e8;
-    margin: 30px 30px 30px 630px;
+    height: 40px;
+    background-color: rgb(83, 86, 241);
+    margin: 50px 10px;
+}
+
+.nav-button:hover {
+    background-color: rgb(70, 72, 204);
 }
