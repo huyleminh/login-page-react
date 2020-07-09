@@ -4,7 +4,7 @@
             {"userName":"Admin","password":"123456"}
         ],
 
-        "path" : ["/manager","/information","/products", "/", "/login"]
+        "path" : ["/", "/manager", "/information", "/products", "/login"]
     },
 
     "user" : {
@@ -12,7 +12,7 @@
             {"userName":"User","password":"123456"}
         ],
 
-        "path" : ["/information","/products", "/", "/login"]
+        "path" : ["/","/information","/products", "/login"]
     },
 
     "guest" : {
@@ -20,6 +20,6 @@
             {"userName":"Guest","password":"123456"}
         ],
         
-        "path" : ["/products", "/", "/login"]
+        "path" : ["/", "/products", "/login"]
     }
 }
