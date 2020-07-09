@@ -1,6 +1,6 @@
 import React from "react";
 import "../assets/404.css";
-import { IBaseProps } from "../BaseInterface/BaseInterface"
+import { IBaseProps } from "../BaseInterfaces/BaseInterface"
 
 
 
@@ -12,7 +12,9 @@ class PageNotFound extends React.Component<IBaseProps, any> {
     render() {
         return (
             <div className="bg-404">
-                <button className="go-back-button" onClick={this.handleClick}>Trang chủ</button>
+                <div className="btn-block">
+                    <button className="nav-button" onClick={this.handleClick}>Trang chủ</button>
+                </div>
             </div>
         )
     }
