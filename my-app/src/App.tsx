@@ -6,21 +6,22 @@ import {
 import Manager from "./Layouts/Manager";
 import Information from "./Layouts/Information";
 import Products from "./Layouts/Products";
-import Login from "./Login";
+import Login from "./Layouts/Login";
 import DashBoard from "./Layouts/DashBoard";
 import PageNotFound from "./Errors/PageNotFound";
 import Forbidden from "./Errors/Forbidden";
+import PrivateRoute from "./PrivateRoute";
 
-class App extends React.Component {
+class App extends React.Component<any, any> {
   render() {
     return(
         <Switch>
           <Route path="/login" component={Login} />
-          <Route path="/manager" component={Manager} />
-          <Route path="/information" component={Information} />
-          <Route path="/products" component={Products} />
-          <Route path="/forbidden" component={Forbidden} />
-          <Route exact path="/" component={DashBoard} />
+          <PrivateRoute path="/manager" component={Manager} />
+          <PrivateRoute path="/information" component={Information} />
+          <PrivateRoute path="/products" component={Products} />
+          <Route path="/403" component={Forbidden} />
+          <PrivateRoute exact path="/" component={DashBoard} />
           <Route component={PageNotFound} />
         </Switch>
     );
