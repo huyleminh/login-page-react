@@ -2,8 +2,17 @@
 
 ## Overview: 
     This project is about how we can decentralize an user account when he/she login to web page.
+## Details: 
+* First we have a matrix about decentralization like this: 
+
+    |  | / | /manager | /information | /products |
+    |-----------|:-----------:|:-----------:|:-----------:|:-----------:|
+    | admin | X | X | X | X |
+    | user | X |  | X | X |
+    | guest | X |  |  | X |
+* More details abobut the matrix above: 
+    * The first column is a list of all role in 
 ## What’s Included?
----
 * Reactjs: 
     Learn more at [https://reactjs.org](https://reactjs.org/)
 * React Router: Use Browser Router, Route (define a new route: *private route*), NavLink, Switch
@@ -14,7 +23,6 @@
     Learn more at [http://es6-features.org](http://es6-features.org/#Constants)
 
 ## File structures
----
 * **Let's see what we have in this project:**
 I will represent main folder and main file only, to read more details, please read the description below the map.
 ```
@@ -54,7 +62,7 @@ screen if you're not yet authenticated, if you don't have any permission to acce
 * **Changing structure:** You can reorganize this structure in any ways you like.
 
 ## Usage 
----
+
 #### Run app
 * Open your project folder, install node_modules before run this app using `npm i`
 *  `cd my-app`
@@ -69,6 +77,6 @@ screen if you're not yet authenticated, if you don't have any permission to acce
 * All accounts can access to **Home Page**, **Products page**, there are some page that you can not access if your key role not correct and they are not rendered on the navigation bar. If you try to access those pages by changing the URL, you will be redirect to **Forbidden page!!!**
 
 ## Contributing
----
+
 If you have any report or something new that can help to develope more feature for the app, please contact me via this email: leminhhuy.hcmus@gmail.com
 Thanks for using and reporting this project.
