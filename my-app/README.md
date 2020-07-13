@@ -10,8 +10,30 @@
     | admin | X | X | X | X |
     | user | X |  | X | X |
     | guest | X |  |  | X |
-* More details abobut the matrix above: 
-    * The first column is a list of all role in 
+* About the matrix above: 
+    * The first column is a list of all role can access the web.
+    * The first row is all paths, each path represents for a page.
+    * "X" is mark that a role can access to a path name, empty cells are not.
+    * If you login by "admin", you can access all paths.
+    * As "user", if you try to access to "/manager" by changing url, you will be redirected to "/403" (forbidden page)
+    * As "guest", if you try to access to "/manager" or "/information" by changing url, you will be redirected to "/403" (forbidden page)
+
+## What's used to decentralize? 
+* I use **Route** and **PrivateRoute** to do that, take a look in App.tsx.
+    * **Route** is used to render Login, PageNotFound and Forbidden components.
+    * **PrivateRoute** is used to render DashBoard, Manager, Information and Products components.
+* About **Route** : 
+    * A component that is perhaps the most basic and important component of React Router.
+    * Used to render UI of a component.
+    * Props: path, component. 
+    * When the current location match the input path, it'll render the children component (component props). So it can render componet that any user as any role can access to public page.
+* About **PrivateRoute**: 
+    * Defined in PrivateRoute.tsx .
+    * A component which is designed as a function component has basic feature as same as **Route** is render children component when current location match the path. And its props are the same as **Route**. 
+    * Advance feature: Can authenticate that user is logged in or not. If they are not logged in, so redirect to /login. If they are logged in, check that if current role is valid, render the children component. If not, it'll redirect to /403 (render Forbidden component).
+    * All above features are defined in render funtion of **Route**, this function is included if...else statement to check all requirements.
+* Though **PrivateRoute** is as same as **Route**,it's more convenient than **Route** that we can redefined it to render a children component in some requirement.
+
 ## What’s Included?
 * Reactjs: 
     Learn more at [https://reactjs.org](https://reactjs.org/)
@@ -21,45 +43,6 @@
     Learn more at [https://www.typescriptlang.org](https://www.typescriptlang.org/)
 * ES6
     Learn more at [http://es6-features.org](http://es6-features.org/#Constants)
-
-## File structures
-* **Let's see what we have in this project:**
-I will represent main folder and main file only, to read more details, please read the description below the map.
-```
-my-app
-    |-- public
-    |-- scr
-        |-- assets
-        |-- BaseInterfaces
-        |-- Data
-        |-- Errors
-        |-- Images
-        |-- Layouts
-        |-- App.tsx
-        |-- App.test.tsx
-        |-- index.tsx
-        |-- logo.svg
-        |-- NavBar.tsx
-        |-- PrivateRoute.tsx
-        |-- react-app-env.d.ts
-        |-- serviceWorker.ts
-    |-- .gitignore
-    |-- package.json
-    |-- package-lock.json
-    |-- README.md
-    |--tsconfig.json
-```
-* **File's description:**
-    * **assets**: Stores .css files.
-    * **BaseInterface**: Stores file *.ts* that defines base interface for the program.
-    * **Data:** Stores your program data.
-    * **Errors:** Defines 403 and 404 layouts.
-    * **Images:** You can store any type of images in this folder in order to use in .css files.
-    * **Layouts:** Stores components that render main pages
-    * **NavBar.tsx:** Defines a smart navigation bar. Corresponding to a access role, it will render a navigation bar suitably.
-    * **PrivateRoute.tsx:** Defines a wrapper for <Route> that redirects to the login
-screen if you're not yet authenticated, if you don't have any permission to access some pages you will be redirect to forbidden page. 
-* **Changing structure:** You can reorganize this structure in any ways you like.
 
 ## Usage 
 
