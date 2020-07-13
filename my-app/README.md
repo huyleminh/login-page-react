@@ -30,8 +30,35 @@
 * About **PrivateRoute**: 
     * Defined in PrivateRoute.tsx .
     * A component which is designed as a function component has basic feature as same as **Route** is render children component when current location match the path. And its props are the same as **Route**. 
-    * Advance feature: Can authenticate that user is logged in or not. If they are not logged in, so redirect to /login. If they are logged in, check that if current role is valid, render the children component. If not, it'll redirect to /403 (render Forbidden component).
+    * Advance feature: Can authenticate that user is logged in or not. If they are not logged in, so redirect to /login. If they are logged in (`fakeAuth.isAuthenticated`), check that if current role is valid, render the children component. If not (`!data[role].path.includes(props.location.pathname)`), it'll redirect to /403 (render Forbidden component).
     * All above features are defined in render funtion of **Route**, this function is included if...else statement to check all requirements.
+```js
+function PrivateRoute({ component: Component, ...rest }: any) {
+    return (
+        <div>
+            <Route
+                {...rest}
+                render={(props: IBaseProps) => {
+                    if (fakeAuth.isAuthenticated) {
+                        if (role === null || !listRole.includes(role)) 
+                        {
+                            return (<Redirect to="/login"/>)
+                        }
+                        if (!data[role].path.includes(props.location.pathname)) 
+                        {
+                            return (<Redirect to="/403"/>)
+                        }
+                        else 
+                        {
+                            return (<Component {...props}/>)
+                        }
+                    }
+                    else { return (<Redirect to="/login"/>) }
+                }} />
+        </div>
+    );
+}
+```
 * Though **PrivateRoute** is as same as **Route**,it's more convenient than **Route** that we can redefined it to render a children component in some requirement.
 
 ## What’s Included?
