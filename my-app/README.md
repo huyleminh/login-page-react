@@ -9,9 +9,14 @@
     |-----------|:-----------:|:-----------:|:-----------:|:-----------:|
     | admin | X | X | X | X |
     | user | X |  | X | X |
-    | guest | X |  |  | X |
+    | guest | X |  |  | X | 
 * More details abobut the matrix above: 
-    * The first column is a list of all role in 
+    * The first column is a list of all role can access the web.
+    * The first row is all paths, each path represents for a page. 
+    * "X" is mark that a role can access to a path name, empty cells are not.
+    * If you login by "admin", you can access all paths. 
+    * As "user", if you try to access to "/manager" by changing url, you will be redirected to "/403" (forbidden page)
+    * As "guest", if you try to access to "/manager" or "/information" by changing url, you will be redirected to "/403" (forbidden page)
 ## What’s Included?
 * Reactjs: 
     Learn more at [https://reactjs.org](https://reactjs.org/)
