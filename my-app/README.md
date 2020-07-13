@@ -50,7 +50,7 @@ function PrivateRoute({ component: Component, ...rest }: any) {
                         }
                         else 
                         {
-                            return (<Component {...props}/>)
+                            return (<Component {...props}/>) //render component
                         }
                     }
                     else { return (<Redirect to="/login"/>) }
