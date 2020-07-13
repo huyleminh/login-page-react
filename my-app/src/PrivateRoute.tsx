@@ -20,7 +20,7 @@ export default function PrivateRoute({ component: Component, ...rest }: any) {
             <Route
                 {...rest}
                  render={(props: IBaseProps) => {
-                    if (fakeAuth.isAuthenticated) {
+                    if (fakeAuth.isAuthenticated === true) {
                         if (role === null || !listRole.includes(role)) {
                             return (<Redirect to="/login"/>)
                         }
@@ -33,8 +33,8 @@ export default function PrivateRoute({ component: Component, ...rest }: any) {
                     }
                     else {
                         return (<Redirect to="/login"/>)
-                    }
-                }}
+                    }}
+                }
             />
         </div>
     );
