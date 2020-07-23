@@ -1,0 +1,17 @@
+{
+    "admin": [
+        {"username":"Admin_1","password":"123456", "id":"a-1"},
+        {"username":"Admin_2","password":"123456", "id":"a-2"}
+    ],
+
+    "user": [
+        {"username":"User_1","password":"123456", "id":"u-1"},
+        {"username":"User_2","password":"123456", "id":"u-2"},
+        {"username":"User_3","password":"123456", "id":"u-3"}
+    ],
+
+    "guest": [
+       {"username":"Guest_1","password":"123456", "id":"g-1"},
+       {"username":"Guest_2","password":"123456", "id":"g-2"}
+    ]
+}
