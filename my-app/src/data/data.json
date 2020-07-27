@@ -1,25 +1,89 @@
-{
-    "admin" : {
-        "info" : [
-            {"userName":"Admin","password":"123456"}
-        ],
-
-        "path" : ["/", "/manager", "/information", "/products", "/login"]
+[
+    {
+        "title": "Manager",
+        "role": ["admin"],
+        "member": ["a-1", "a-2"],
+        "path": "/manager",
+        "type": "bar",
+        "hasChild": true,
+        "child": [
+            {
+                "title": "Add member",
+                "role": ["admin"],
+                "member": ["a-1", "a-2"],
+                "path": "/manager/add-member",
+                "type": "content",
+                "hasChild": false,
+                "child": []
+            },
+            {
+                "title": "Delete member", 
+                "role": ["admin"],
+                "member": ["a-1", "a-2"],
+                "path": "/manager/delete-member",
+                "type": "content",
+                "hasChild": false,
+                "child": []
+            }
+        ]
     },
 
-    "user" : {
-        "info" : [
-            {"userName":"User","password":"123456"}
-        ],
-
-        "path" : ["/","/information","/products", "/login"]
+    {
+        "title": "Information",
+        "role": ["admin", "user"],
+        "member": ["a-1", "a-2", "u-1", "u-2", "u-3"],
+        "path": "/information",
+        "type": "bar",
+        "hasChild": true,
+        "child": [
+            {
+                "title": "Notifications ",
+                "role": ["admin", "user"],
+                "member": ["a-1", "a-2", "u-1", "u-2", "u-3"],
+                "path": "/information/view-notification",
+                "type": "content",
+                "hasChild": false,
+                "child": []
+            },
+            {
+                "title": "Add notifications",
+                "role": ["admin"],
+                "member": ["a-1", "a-2"],
+                "path": "/information/add-notification",
+                "type": "content",
+                "hasChild": false,
+                "child": []
+            }
+        ]
     },
 
-    "guest" : {
-        "info" : [
-            {"userName":"Guest","password":"123456"}
-        ],
-        
-        "path" : ["/", "/products", "/login"]
+    {
+        "title": "Products",
+        "role": ["admin", "user", "guest"],
+        "member": ["a-1", "a-2", "u-1", "u-2", "u-3", "g-1", "g-2"],
+        "path": "/products",
+        "type": "bar",
+        "hasChild": true,
+        "child": [
+            {
+                "title": "View products",
+                "role": ["admin", "user", "guest"],
+                "member": ["a-1", "a-2", "u-1", "u-2", "u-3", "g-1", "g-2"],
+                "path": "/products/view-products",
+                "type": "content",
+                "hasChild": false,
+                "child": []
+            },
+
+            {
+                "title": "Add new product",
+                "role": ["admin", "user"],
+                "member": ["a-1", "a-2", "u-1", "u-2", "u-3"],
+                "path": "/products/add-new",
+                "type": "content",
+                "hasChild": false,
+                "child": []
+            }    
+        ]
     }
-}
+]
