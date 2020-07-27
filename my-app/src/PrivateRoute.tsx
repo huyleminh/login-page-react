@@ -3,16 +3,30 @@ import {
     Route,
     Redirect,
 } from "react-router-dom";
-import { IBaseProps, IData } from "./BaseInterfaces/BaseInterface";
-import UserData from "./Data/data.json"
+import { IBaseProps } from "./BaseInterfaces/BaseInterface";
+import getData from "./GetData";
+import data from "./Data/data.json"
 
 
-const role = localStorage.getItem('role');
-const data: IData = UserData;
-const listRole = Object.keys(data);
-const fakeAuth = {
-    isAuthenticated: true
+const user = localStorage.getItem('user');
+let userObj = {role: "", id: ""}
+if (user !== null) {
+    userObj = JSON.parse(user);   
 }
+let contents = [] as Array<any>;
+let paths = [] as Array<any>;   
+let ids = [] as Array<any>;
+let roles = [] as Array<any>;
+getData(data, contents, paths, ids, roles);
+
+const listId = Array.from(new Set(ids.reduce((acc, cur) => {
+    return acc.concat(cur)
+}, [])))
+
+const listRole = Array.from((roles.reduce((acc, cur) => {
+    return acc.concat(cur)
+}, [])))
+
 
 export default function PrivateRoute({ component: Component, ...rest }: any) {
     return (
@@ -20,21 +34,17 @@ export default function PrivateRoute({ component: Component, ...rest }: any) {
             <Route
                 {...rest}
                  render={(props: IBaseProps) => {
-                    if (fakeAuth.isAuthenticated === true) {
-                        if (role === null || !listRole.includes(role)) {
-                            return (<Redirect to="/login"/>)
-                        }
-                        if (!data[role].path.includes(props.location.pathname)) {
-                            return (<Redirect to="/403"/>)
-                        }
-                        else {
-                            return (<Component {...props}/>)
+                    if (listRole.includes(userObj.role) && listId.includes(userObj.id)) {
+                         if (paths.includes(props.location.pathname)) {
+                            return <Component {...props}/> 
+                         }
+                        else { 
+                            return <Redirect to="/403"/>
                         }
                     }
-                    else {
-                        return (<Redirect to="/login"/>)
-                    }}
-                }
+                    else 
+                        return <Redirect to="/login"/>
+                }}
             />
         </div>
     );
