@@ -1,6 +1,6 @@
 import React from "react";
 import "../assets/Login.css";
-import UserData from "../Data/data.json";
+import UserData from "../Data/users.json";
 import {
     IAccountState,
     IBaseProps,
@@ -15,14 +15,14 @@ class Login extends React.Component<IBaseProps, IAccountState> {
     constructor(props: IBaseProps) {
         super(props);
         this.state = {
-            _userName: "",
+            _username: "",
             _password: "",
         }
     }
 
     getUserInfo = (event: any) => {
         this.setState({
-            _userName: event.target.value,
+            _username: event.target.value,
         })
     }
 
@@ -33,17 +33,21 @@ class Login extends React.Component<IBaseProps, IAccountState> {
     }
 
     checkLogin = () => {
-        let role = ""
+        let user = {
+            role: "",
+            id: ""
+        }
         const userAcc = {
-            userName: this.state._userName,
+            username: this.state._username,
             password: this.state._password
         }       
 
         let flag = 0;
         for (let key in data) {
-            for (let element of data[key].info)
-                if (userAcc.password === element.password && userAcc.userName === element.userName) {                    role = 
-                    role = key;
+            for (let element of data[key])
+                if (userAcc.password === element.password && userAcc.username === element.username) {
+                    user.role = key;
+                    user.id = element.id;
                     flag = 1;
                     break;
                 }
@@ -53,8 +57,9 @@ class Login extends React.Component<IBaseProps, IAccountState> {
             alert("Sai tên đăng nhập hoặc mật khẩu!!!");
             this.props.history.push("/login");
         }
-
-        localStorage.setItem('role', role);
+        else {
+            localStorage.setItem('user', JSON.stringify(user));
+        }
     }
     render() {
         return (
@@ -62,7 +67,7 @@ class Login extends React.Component<IBaseProps, IAccountState> {
                 <div className="login-box">
                     <h3 id="login-title">Log In</h3>
                     <form className="form-control" action="/">
-                        <input autoFocus type="text" placeholder="Username" name="_userName" value={this.state._userName} onChange={this.getUserInfo}/><br/>
+                        <input autoFocus type="text" placeholder="username" name="_username" value={this.state._username} onChange={this.getUserInfo}/><br/>
                         <input type="password" placeholder="Password" autoComplete="off" name="_password" value={this.state._password} onChange={this.getUserPassword}/>
                         <div>
                             <button className="btn-group-lg" type="submit" onClick={this.checkLogin}>Log in</button>
