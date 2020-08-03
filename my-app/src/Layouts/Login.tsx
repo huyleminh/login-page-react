@@ -1,6 +1,6 @@
 import React from "react";
 import "../assets/Login.css";
-import UserData from "../Data/users.json";
+import UserData from "../data/users.json";
 import {
     IAccountState,
     IBaseProps,

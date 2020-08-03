@@ -3,7 +3,7 @@ import {NavBar} from "../NavBar";
 import "../assets/NavBar.css";
 import { IBaseProps } from "../BaseInterfaces/BaseInterface";
 import {Switch} from "react-router-dom"
-import PrivateRoute from "../PrivateRoute"
+import Route from "../PrivateRoute"
 
 
 
@@ -13,9 +13,9 @@ class Information extends React.Component<IBaseProps, any> {
             <div>
                 <NavBar />
                 <Switch>
-                    <PrivateRoute exact path="/information"> <InformationHome/> </PrivateRoute>
-                    <PrivateRoute exact path="/information/view-notification"> <Notifications/> </PrivateRoute>
-                    <PrivateRoute exact path="/information/add-notification"> <AddNotifications/> </PrivateRoute>
+                    <Route exact path="/information"> <InformationHome/> </Route>
+                    <Route exact path="/information/view-notification"> <Notifications/> </Route>
+                    <Route exact path="/information/add-notification"> <AddNotifications/> </Route>
                 </Switch>
             </div>
         );

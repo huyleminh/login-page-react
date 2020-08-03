@@ -2,7 +2,7 @@ import React from "react";
 import {NavBar} from "../NavBar";
 import { IBaseProps } from "../BaseInterfaces/BaseInterface";
 import  {Switch} from "react-router-dom"
-import PrivateRoute from "../PrivateRoute"
+import Route from "../PrivateRoute"
 
 
 
@@ -12,9 +12,9 @@ class Manager extends React.Component<IBaseProps, any> {
             <div>
                 <NavBar />
                 <Switch>
-                    <PrivateRoute exact path="/manager"> <ManagerHome/> </PrivateRoute>
-                    <PrivateRoute exact path="/manager/add-member"> <AddMember/> </PrivateRoute>
-                    <PrivateRoute exact path="/manager/delete-member"> <DeleteMember/> </PrivateRoute>
+                    <Route exact path="/manager"> <ManagerHome/> </Route>
+                    <Route exact path="/manager/add-member"> <AddMember/> </Route>
+                    <Route exact path="/manager/delete-member"> <DeleteMember/> </Route>
                 </Switch>
             </div>
         );

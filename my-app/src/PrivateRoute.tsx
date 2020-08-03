@@ -5,7 +5,7 @@ import {
 } from "react-router-dom";
 import { IBaseProps } from "./BaseInterfaces/BaseInterface";
 import getData from "./GetData";
-import data from "./Data/data.json"
+import data from "./data/data.json"
 
 
 const user = localStorage.getItem('user');
@@ -36,7 +36,7 @@ export default function PrivateRoute({ component: Component, ...rest }: any) {
                  render={(props: IBaseProps) => {
                     if (listRole.includes(userObj.role) && listId.includes(userObj.id)) {
                          if (paths.includes(props.location.pathname)) {
-                            return <Component {...props}/> 
+                            return <Component {...props}/>
                          }
                         else { 
                             return <Redirect to="/403"/>
