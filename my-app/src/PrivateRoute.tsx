@@ -35,15 +35,17 @@ export default function PrivateRoute({ component: Component, ...rest }: any) {
                 {...rest}
                  render={(props: IBaseProps) => {
                     if (listRole.includes(userObj.role) && listId.includes(userObj.id)) {
-                         if (paths.includes(props.location.pathname)) {
+                        if (paths.includes(props.location.pathname)) {
                             return <Component {...props}/>
                          }
                         else { 
                             return <Redirect to="/403"/>
                         }
                     }
-                    else 
+                    else {
+                        localStorage.clear();
                         return <Redirect to="/login"/>
+                    }
                 }}
             />
         </div>
