@@ -8,7 +8,6 @@ import {
 } from "../BaseInterfaces/BaseInterface";
 
 
-
 const data: IData = UserData;
 
 class Login extends React.Component<IBaseProps, IAccountState> {

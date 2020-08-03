@@ -3,7 +3,6 @@ import {NavBar} from "../NavBar";
 import { IBaseProps } from "../BaseInterfaces/BaseInterface";
 
 
-
 class DashBoard extends React.Component<IBaseProps, any> {
     render() {
         return (
