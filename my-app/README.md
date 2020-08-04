@@ -5,11 +5,15 @@
 ## Details: 
 * First we have a matrix about decentralization like this: 
 
-    |  | / | /manager | /information | /products |
-    |-----------|:-----------:|:-----------:|:-----------:|:-----------:|
-    | admin | X | X | X | X |
-    | user | X |  | X | X |
-    | guest | X |  |  | X |
+    |  || / | /manager | /manager/add-memberr | /manager/delete-member | /information| /information/view-notification  | /information/add-notification | /products | /products/view-products | products/add-new|
+    |-----------|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
+    | admin | a-1 | X | X | X | X | X | X | X | X | X |
+    | admin | a-2 | X | X | X | X | X | X | X | X | X |
+    | user | u-1 | X | X | X | X | X | X | X | X | X |
+    | user | u-2 | X | X | X | X | X | X | X | X | X |
+    | user | u-3 | X | X | X | X | X | X | X | X | X |
+    | guest | g-1 | X | X | X | X | X | X | X | X | X |
+    | guest | g-2 | X | X | X | X | X | X | X | X | X |
 * About the matrix above: 
     * The first column is a list of all role can access the web.
     * The first row is all paths, each path represents for a page.
