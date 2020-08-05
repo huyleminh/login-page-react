@@ -5,39 +5,38 @@
 ## Details: 
 * First we have a matrix about decentralization like this: 
 
-    |  || / | /manager | /manager/add-memberr | /manager/delete-member | /information| /information/view-notification  | /information/add-notification | /products | /products/view-products | products/add-new|
+    | Role | Member | / | /manager | /manager/add-member | /manager/delete-member | /information| /information/view-notification  | /information/add-notification | /products | /products/view-products | products/add-new|
     |-----------|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
-    | admin | a-1 | X | X | X | X | X | X | X | X | X |
-    | admin | a-2 | X | X | X | X | X | X | X | X | X |
-    | user | u-1 | X | X | X | X | X | X | X | X | X |
-    | user | u-2 | X | X | X | X | X | X | X | X | X |
-    | user | u-3 | X | X | X | X | X | X | X | X | X |
-    | guest | g-1 | X | X | X | X | X | X | X | X | X |
-    | guest | g-2 | X | X | X | X | X | X | X | X | X |
+    | admin | a-1 | X | X | X | X | X | X | X | X | X | X |
+    |  | a-2 | X | X | X | X | X | X | X | X | X | X |
+    | user | u-1 | X |||| X | X || X | X | X |
+    || u-2 | X |||| X | X || X | X | X |
+    || u-3 | X |||| X | X || X | X | X |
+    | guest | g-1 | X ||||||| X | X ||
+    || g-2 | X ||||||| X | X ||
 * About the matrix above: 
     * The first column is a list of all role can access the web.
-    * The first row is all paths, each path represents for a page.
-    * "X" is mark that a role can access to a path name, empty cells are not.
+    * The second column is a list of all member's ids. 
+    * Each cells on first row from the third cell is a page's path, each path represents for a page.
+    * "X" is mark that a user can access to a path name, empty cells are not.
     * If you login by "admin", you can access all paths.
-    * As "user", if you try to access to "/manager" by changing url, you will be redirected to "/403" (forbidden page)
-    * As "guest", if you try to access to "/manager" or "/information" by changing url, you will be redirected to "/403" (forbidden page)
+    * As a member with an id and a role which is not "admin", you can access to all pages thats are mark "X", if not you will be redirected to "/403" is forbidden page (changing URL to access to protected pages is denied).
 
 ## What's used to decentralize? 
-* I use **Route** and **PrivateRoute** to do that, take a look in App.tsx.
-    * **Route** is used to render Login, PageNotFound and Forbidden components.
-    * **PrivateRoute** is used to render DashBoard, Manager, Information and Products components.
-* About **Route** : 
-    * A component that is perhaps the most basic and important component of React Router.
-    * Used to render UI of a component.
-    * Props: path, component. 
-    * When the current location match the input path, it'll render the children component (component props). So it can render componet that any user as any role can access to public page.
-* About **PrivateRoute**: 
-    * Defined in PrivateRoute.tsx .
-    * A component which is designed as a function component has basic feature as same as **Route** is render children component when current location match the path. And its props are the same as **Route**. 
-    * Advance feature: Can authenticate that user is logged in or not. If they are not logged in, so redirect to /login. If they are logged in (`fakeAuth.isAuthenticated`), check that if current role is valid, render the children component. If not (`!data[role].path.includes(props.location.pathname)`), it'll redirect to /403 (render Forbidden component).
-    * All above features are defined in render funtion of **Route**, this function is included if...else statement to check all requirements.
-
-* Though **PrivateRoute** is as same as **Route**,it's more convenient than **Route** that we can redefined it to render a children component in some requirement.
+* Decentralization is executed after navigation bar is rendered.
+* Navigation bar's data is a tree data. 
+* Class NavBar in **NavBar.tsx** has private attribute is path. "path" is used to store paths which are taken from tree data while rendering NavBar using recursion. These are valid paths that a user can access to a page.
+* When we change page by changing URL's path name or click on the navigation bar's cells, we'll have a path name, it can be call by
+```js
+this.props.location.pathname
+```
+* After rendering, `componentDidMount` is called, it will check that the current path name is valid or not, if not we will be redirect to "/403". 
+```js
+componentDidMount() {
+    if (!this.path.includes(this.props.location.pathname))
+        this.props.history.push("/403")
+    }
+``` 
 
 ## What’s Included?
 * Reactjs: 
@@ -52,7 +51,7 @@
 ## Usage 
 
 #### Run app
-* Open your project folder, install node_modules before run this app using `npm i`
+* Open your project folder, install node_modules before run this app using `npm install`
 *  `cd my-app`
 * `npm start`
     - Runs the app in the development mode.
