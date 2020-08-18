@@ -1,17 +1,17 @@
 import React from "react";
 import "../assets/403.css";
 import {IBaseProps} from "../BaseInterfaces/BaseInterface";
+import { GlobalEvent } from "../events";
 
 
 
 class Forbidden extends React.Component<IBaseProps, any> {
     goHome = () => {
-        this.props.history.push("/");
+        GlobalEvent.Init.baseEmit("home", this.props)
     }
 
     handleLogout = () => {
-        localStorage.clear()
-        this.props.history.push("/login")
+        GlobalEvent.Init.baseEmit("logout", this.props)
     }
 
     render() {
