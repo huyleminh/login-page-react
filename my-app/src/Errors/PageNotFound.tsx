@@ -1,23 +1,25 @@
 import React from "react";
 import "../assets/404.css";
 import { IBaseProps } from "../BaseInterfaces/BaseInterface"
+import { GlobalEvent } from "../events";
+import {withRouter} from "react-router-dom"
 
 
 
 class PageNotFound extends React.Component<IBaseProps, any> {
-    handleClick = () => {
-        this.props.history.push("/");
+    goHome = () => {
+        GlobalEvent.Init.baseEmit("home", this.props)
     }
 
     render() {
         return (
             <div className="bg-404">
                 <div className="btn-block">
-                    <button className="nav-button" onClick={this.handleClick}>Trang chủ</button>
+                    <button className="nav-button" onClick={this.goHome}>Trang chủ</button>
                 </div>
             </div>
         )
     }
 }
 
-export default PageNotFound;
+export default withRouter(PageNotFound);
