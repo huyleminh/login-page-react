@@ -1,8 +1,6 @@
 import React from "react";
-import {
-  Switch, 
-  Route
-} from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
+import { withRouter } from "react-router";
 //Manager components
 import Manager from "./Layouts/Manager";
 import AddMember from "./Layouts/AddMember";
@@ -20,32 +18,59 @@ import Login from "./Layouts/Login";
 import DashBoard from "./Layouts/DashBoard";
 import PageNotFound from "./Errors/PageNotFound";
 import Forbidden from "./Errors/Forbidden";
+import { GlobalEvent } from "./events";
+import { IBaseProps } from "./BaseInterfaces/BaseInterface";
 
+class App extends React.Component<IBaseProps, any> {
+  constructor(props: IBaseProps) {
+    super(props);
 
-class App extends React.Component<any, any> {
+    GlobalEvent.Init.baseOn("home", (props: IBaseProps) => {
+      if (!localStorage.getItem("user")) {
+        localStorage.clear();
+        props.history.push("/login");
+      } else {
+        props.history.push("/");
+      }
+    });
+
+    GlobalEvent.Init.baseOn("logout", (props: IBaseProps) => {
+      localStorage.clear();
+      props.history.push("/login");
+    });
+  }
+
   render() {
-    return(
-        <Switch>
-          <Route path="/login" component={Login}/>
+    return (
+      <Switch>
+        <Route path="/login" component={Login} />
 
-          <Route exact path="/manager" component={Manager}/>
-          <Route path="/manager/add-member" component={AddMember}/>
-          <Route path="/manager/delete-member" component={DeleteMember}/> 
+        <Route exact path="/manager" component={Manager} />
+        <Route path="/manager/add-member" component={AddMember} />
+        <Route path="/manager/delete-member" component={DeleteMember} />
 
-          <Route exact path="/information" component={Information}/>
-          <Route path="/information/view-notification" component={Notification}/>
-          <Route path="/information/add-notification" component={AddNotification}/>
+        <Route exact path="/information" component={Information} />
+        <Route path="/information/view-notification" component={Notification} />
+        <Route
+          path="/information/add-notification"
+          component={AddNotification}
+        />
 
-          <Route exact path="/products" component={Products}/>
-          <Route path="/products/add-new" component={AddProduct}/>
-          <Route path="/products/view-products" component={ViewProducts}/>
+        <Route exact path="/products" component={Products} />
+        <Route path="/products/add-new" component={AddProduct} />
+        <Route path="/products/view-products" component={ViewProducts} />
 
-          <Route path="/403" component={Forbidden}/>
-          <Route exact path="/" component={DashBoard}/>
-          <Route component={PageNotFound}/>
-        </Switch>
+        <Route path="/403" component={Forbidden} />
+        <Route path="/404" component={PageNotFound} />
+        <Route exact path="/" component={DashBoard} />
+        <Route>
+          <Redirect to="/404">
+            <PageNotFound />
+          </Redirect>
+        </Route>
+      </Switch>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
