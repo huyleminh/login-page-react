@@ -4,6 +4,7 @@ import { IBaseProps, IDataElementBar } from "./BaseInterfaces/BaseInterface";
 import data from "./data/data.json";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
+import {GlobalEvent} from "./events"
 
 
 const user = localStorage.getItem("user");
@@ -12,32 +13,30 @@ if (user !== null) {
     userObj = JSON.parse(user);
 }
 
-
 class NavBarView extends React.Component<IBaseProps, any> {   
-    private path : Array<string>;
+    private _path : Array<string>;
+    private _status: boolean;
     constructor(props: IBaseProps) {
         super(props);
-        this.state = {
-            path: ["/"]
-        };
-        this.path = ["/"];
+        this._path = ["/"];
+        this._status = false;
     }
 
     goHome = () => {
-        this.props.history.push("/");
-    };
+		  GlobalEvent.Init.baseEmit("home", this.props);
+    }
 
     handleLogOut = () => {
-        localStorage.clear();
-        this.props.history.push("/login");
+        GlobalEvent.Init.baseEmit("logout", this.props)
     };
 
     dynamicNavBar = (data: Array<IDataElementBar>) => {
         let result = data.map((item: IDataElementBar) => {
             if (item.role.includes(userObj.role)) {
                 if (item.member.includes(userObj.id)) {
+                    this._status = true;
                     if (item.hasChild) {
-                        this.path.push(item.path)
+                        this._path.push(item.path)
                         return (
                             <div className="nav-dropdown">
                                 <button className="nav-dropdown-btn">
@@ -51,7 +50,7 @@ class NavBarView extends React.Component<IBaseProps, any> {
                         </div>
                         );
                     } else {
-                        this.path.push(item.path)
+                        this._path.push(item.path)
                         return (
                             <Link className="nav-dropdown-content-NavLink" to={item.path}>
                                 {item.title}
@@ -68,14 +67,16 @@ class NavBarView extends React.Component<IBaseProps, any> {
         return result;
     };
 
-
     componentDidMount() {
-        if (!this.path.includes(this.props.location.pathname))
+        if (this._status === false){
+            GlobalEvent.Init.baseEmit("logout", this.props)
+        }
+        if (!this._path.includes(this.props.location.pathname))
             this.props.history.push("/403")
     }
 
     render() {
-        this.path = ["/"]
+        this._path = ["/"]
         return (
             <div className="nav-container">
                 <div className="nav-dropdown">
