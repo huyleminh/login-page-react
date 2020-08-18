@@ -6,6 +6,7 @@ import {
     IBaseProps,
     IData
 } from "../BaseInterfaces/BaseInterface";
+import { GlobalEvent, LoginEvent } from "../events";
 
 
 const data: IData = UserData;
@@ -17,6 +18,20 @@ class Login extends React.Component<IBaseProps, IAccountState> {
             _username: "",
             _password: "",
         }
+        
+        LoginEvent.Init.baseOn("login", (props: IBaseProps) => {
+            if (localStorage.getItem("user")) {
+                props.history.push("/")
+            }
+            else {
+                localStorage.clear();
+                props.history.push("/login")
+            }
+        })
+    }
+
+    componentDidMount() {
+        LoginEvent.Init.baseEmit("login", this.props)
     }
 
     getUserInfo = (event: any) => {
@@ -32,6 +47,10 @@ class Login extends React.Component<IBaseProps, IAccountState> {
     }
 
     checkLogin = () => {
+        if (this.state._username === "" || this.state._password === "") {
+            alert("Vui lòng điền đầy đủ thông tin")
+            return
+        }
         let user = {
             role: "",
             id: ""
@@ -53,13 +72,14 @@ class Login extends React.Component<IBaseProps, IAccountState> {
             if (flag === 1) break;
         }
         if (flag === 0) {
-            alert("Sai tên đăng nhập hoặc mật khẩu!!!");
-            this.props.history.push("/login");
+            alert("Sai tên đăng nhập hoặc mật khẩu.\nVui lòng nhập lại thông tin.");
+            GlobalEvent.Init.baseEmit("login", this.props)
         }
         else {
             localStorage.setItem('user', JSON.stringify(user));
         }
     }
+
     render() {
         return (
             <div className="login-container">
@@ -69,11 +89,11 @@ class Login extends React.Component<IBaseProps, IAccountState> {
                         <input autoFocus type="text" placeholder="username" name="_username" value={this.state._username} onChange={this.getUserInfo}/><br/>
                         <input type="password" placeholder="Password" autoComplete="off" name="_password" value={this.state._password} onChange={this.getUserPassword}/>
                         <div>
-                            <button className="btn-group-lg" type="submit" onClick={this.checkLogin}>Log in</button>
+                            <button className="btn-group-lg" type="submit" onClick={this.checkLogin} >Log in</button>
                         </div>
                     </form>
                 </div>
-            </div>                    
+            </div>                
         );
     }
 }
