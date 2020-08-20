@@ -4,7 +4,8 @@ import { IBaseProps, IDataElementBar } from "./BaseInterfaces/BaseInterface";
 import data from "./data/data.json";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
-import {GlobalEvent} from "./events"
+import {GlobalEvent, LoginEvent} from "./events"
+import Login from "./Layouts/Login";
 
 
 const user = localStorage.getItem("user");
@@ -23,7 +24,10 @@ class NavBarView extends React.Component<IBaseProps, any> {
     }
 
     goHome = () => {
-		  GlobalEvent.Init.baseEmit("home", this.props);
+        //   GlobalEvent.Init.baseEmit("home", this.props);
+        console.log(GlobalEvent.Init.baseListenerCount("home"));
+        console.log(GlobalEvent.Init.baseListenerCount("logout"));
+        LoginEvent.Init.baseEmit("login", this.props)
     }
 
     handleLogOut = () => {
