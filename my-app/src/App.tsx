@@ -25,7 +25,7 @@ class App extends React.Component<IBaseProps, any> {
   constructor(props: IBaseProps) {
     super(props);
 
-    GlobalEvent.Init.baseOn("home", (props: IBaseProps) => {
+    GlobalEvent.Init.baseOn("goHome", (props: IBaseProps) => {
       if (!localStorage.getItem("user")) {
         localStorage.clear();
         props.history.push("/login");
@@ -38,6 +38,10 @@ class App extends React.Component<IBaseProps, any> {
       localStorage.clear();
       props.history.push("/login");
     });
+
+    GlobalEvent.Init.baseOn("forbidden", (props: IBaseProps) => {
+      props.history.push("/403")
+    })
   }
 
   render() {
@@ -51,10 +55,7 @@ class App extends React.Component<IBaseProps, any> {
 
         <Route exact path="/information" component={Information} />
         <Route path="/information/view-notification" component={Notification} />
-        <Route
-          path="/information/add-notification"
-          component={AddNotification}
-        />
+        <Route path="/information/add-notification" component={AddNotification} />
 
         <Route exact path="/products" component={Products} />
         <Route path="/products/add-new" component={AddProduct} />
