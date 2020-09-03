@@ -18,13 +18,6 @@ export abstract class BaseEvent {
     if (!this._listeners.includes(item)) this._listeners.push(item);
     this._event.on(eventName, data);
   }
-
-  public baseListenerCount(eventName: string) {
-    const events = this._listeners.filter((item) => {
-      return item.name === eventName;
-    });
-    return events.length;
-  }
 }
 
 export class GlobalEvent extends BaseEvent {
