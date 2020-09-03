@@ -19,7 +19,7 @@ class Login extends React.Component<IBaseProps, IAccountState> {
             _password: "",
         }
         
-        LoginEvent.Init.baseOn("login", (props: IBaseProps) => {
+        LoginEvent.Init.baseOn("checkLogin", (props: IBaseProps) => {
             if (localStorage.getItem("user")) {
                 props.history.push("/")
             }
@@ -31,19 +31,15 @@ class Login extends React.Component<IBaseProps, IAccountState> {
     }
 
     componentDidMount() {
-        LoginEvent.Init.baseEmit("login", this.props)
+        LoginEvent.Init.baseEmit("checkLogin", this.props)
     }
 
-    getUserInfo = (event: any) => {
+    handleChange = (event: any) => {
+        const name: string = event.target.name;
+        const value: IAccountState = event.target.value;
         this.setState({
-            _username: event.target.value,
-        })
-    }
-
-    getUserPassword = (event: any) => {
-        this.setState({
-            _password: event.target.value
-        })
+            [name]: value
+        });
     }
 
     checkLogin = () => {
@@ -86,8 +82,8 @@ class Login extends React.Component<IBaseProps, IAccountState> {
                 <div className="login-box">
                     <h3 id="login-title">Log In</h3>
                     <form className="form-control" action="/">
-                        <input autoFocus type="text" placeholder="username" name="_username" value={this.state._username} onChange={this.getUserInfo}/><br/>
-                        <input type="password" placeholder="Password" autoComplete="off" name="_password" value={this.state._password} onChange={this.getUserPassword}/>
+                        <input autoFocus type="text" placeholder="username" name="_username" value={this.state._username} onChange={this.handleChange}/><br/>
+                        <input type="password" placeholder="Password" autoComplete="off" name="_password" value={this.state._password} onChange={this.handleChange}/>
                         <div>
                             <button className="btn-group-lg" type="submit" onClick={this.checkLogin} >Log in</button>
                         </div>
