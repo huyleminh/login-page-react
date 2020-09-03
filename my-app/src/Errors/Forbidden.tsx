@@ -7,7 +7,7 @@ import { GlobalEvent } from "../events";
 
 class Forbidden extends React.Component<IBaseProps, any> {
     goHome = () => {
-        GlobalEvent.Init.baseEmit("home", this.props)
+        GlobalEvent.Init.baseEmit("goHome", this.props)
     }
 
     handleLogout = () => {
