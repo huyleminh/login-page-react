@@ -1,54 +1,85 @@
-.nav-container {
-  overflow: hidden;
-  background-color: rgb(60, 63, 239);
-  box-shadow: 0px 5px 5px 0px rgb(135, 162, 236);
-}
-
-.nav-dropdown {
-  float: left;
-  overflow: hidden;
-}
-
-.nav-dropdown .nav-dropdown-btn {
-  font-size: 16px;
-  border: none;
-  color: rgb(255, 255, 255);
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit;
-}
-
-.nav-container:hover .nav-dropdown:hover  {
-  background-color: #162add;
-}
-
-.nav-dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #162add;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-}
-
-.nav-dropdown-content-NavLink {
-    float: none;
-    padding: 12px 16px;
-    text-decoration: none;
-    text-align: left;
-    color: #ffffff;
-}
-
-.nav-dropdown-content-NavLink:hover {
-    background-color: #1a29aa;
-}
-
-.nav-dropdown:hover .nav-dropdown-content {
-    display: flex;
-    flex-direction: column;
-    width: fit-content;
-}
-
-.nav-dropdown-btn-a {
+.nav-link-item {
   text-decoration: none;
-  color: inherit;
+  color: #ffffff;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+.nav-link-item:hover {
+  color: #c7c2c2;
+}
+
+.nav-container {
+  background-color: rgb(74, 77, 236);
+  font-family: inherit;
+  display: flex;
+  box-sizing: border-box;
+}
+
+.nav-left, .nav-right{
+  padding: 15px 15px;
+  transition: background-color 0.3s;
+}
+
+.nav-left:hover, .nav-right:hover {
+  background-color: rgb(62, 64, 202);
+}
+
+.nav-middle {
+  flex-grow: 0.96;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  position: relative;
+}
+
+.nav-middle-item {
+  padding: 15px 15px;
+  position: relative;
+  min-height: 25px;
+  transition: background-color 0.3s;
+}
+
+.nav-middle-item:hover {
+  background-color: rgb(62, 64, 202);
+}
+
+.nav-submenu {
+  display: none;
+  flex-direction: column;
+}
+
+.nav-middle-item:hover .nav-submenu {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  margin-top: 19px;
+  background-color: rgb(62, 64, 202);
+  color: #ffffff;
+  min-width: max-content;
+  box-shadow: 0px 8px 8px 0px rgba(0,0,0,0.1);
+  z-index: 1;
+}
+
+.item {
+  padding: 10px;
+  line-height: 20px;
+}
+
+.nav-right-sub {
+  display: none;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.nav-right:hover .nav-right-sub {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  margin-top: 15px;
+  background-color: rgb(62, 64, 202);
+  color: #ffffff;
+  min-width: max-content;
+  box-shadow: 0px 8px 8px 0px rgba(0,0,0,0.1);
+  z-index: 1;
 }

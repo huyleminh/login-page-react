@@ -4,8 +4,9 @@ import { IBaseProps, IDataElementBar } from "./BaseInterfaces/BaseInterface";
 import data from "./data/data.json";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
-import {GlobalEvent, LoginEvent} from "./events"
-import Login from "./Layouts/Login";
+import {GlobalEvent} from "./events"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faHome, faUserCircle} from "@fortawesome/free-solid-svg-icons"
 
 
 const user = localStorage.getItem("user");
@@ -24,10 +25,7 @@ class NavBarView extends React.Component<IBaseProps, any> {
     }
 
     goHome = () => {
-        //   GlobalEvent.Init.baseEmit("home", this.props);
-        console.log(GlobalEvent.Init.baseListenerCount("home"));
-        console.log(GlobalEvent.Init.baseListenerCount("logout"));
-        LoginEvent.Init.baseEmit("login", this.props)
+        GlobalEvent.Init.baseEmit("goHome", this.props)
     }
 
     handleLogOut = () => {
@@ -42,21 +40,17 @@ class NavBarView extends React.Component<IBaseProps, any> {
                     if (item.hasChild) {
                         this._path.push(item.path)
                         return (
-                            <div className="nav-dropdown">
-                                <button className="nav-dropdown-btn">
-                                <Link className="nav-dropdown-btn-a" to={item.path}>
-                                    {item.title}
-                                </Link>
-                                </button>
-                            <div className="nav-dropdown-content">
-                                {this.dynamicNavBar(item.child)}
-                            </div>
+                            <div className="nav-middle-item">
+                                <Link to={item.path} className="nav-link-item" >{item.title}</Link>
+                                <div className="nav-submenu">
+                                    {this.dynamicNavBar(item.child)}
+                                </div>
                         </div>
                         );
                     } else {
                         this._path.push(item.path)
                         return (
-                            <Link className="nav-dropdown-content-NavLink" to={item.path}>
+                            <Link className="nav-link-item item" to={item.path}>
                                 {item.title}
                             </Link>
                         );
@@ -75,26 +69,33 @@ class NavBarView extends React.Component<IBaseProps, any> {
         if (this._status === false){
             GlobalEvent.Init.baseEmit("logout", this.props)
         }
-        if (!this._path.includes(this.props.location.pathname))
-            this.props.history.push("/403")
+        else if (!this._path.includes(this.props.location.pathname))
+            GlobalEvent.Init.baseEmit("forbidden", this.props)
     }
 
     render() {
         this._path = ["/"]
         return (
             <div className="nav-container">
-                <div className="nav-dropdown">
-                    <button className="nav-dropdown-btn" onClick={this.goHome}>
-                        Home
-                    </button>
+                <div className="nav-left">
+                    <div className="nav-link-item" onClick={this.goHome}>   
+                        <FontAwesomeIcon icon={faHome} style={{fontSize: "25px"}}/> 
+                    </div>
                 </div>
 
-                {this.dynamicNavBar(data).map((element) => element)}
+                <div className="nav-middle">
+                    {this.dynamicNavBar(data).map((element) => element)}
+                </div>
 
-                <div className="nav-dropdown">
-                    <button className="nav-dropdown-btn" onClick={this.handleLogOut}>
-                        Logout
-                    </button>
+                <div className="nav-right">
+                    <div className="nav-right-item">
+                        <div className="nav-link-item">
+                            <FontAwesomeIcon icon={faUserCircle} style={{fontSize: "25px"}}/> 
+                        </div>
+                        <div className="nav-right-sub">
+                            <Link to="/login" onClick={this.handleLogOut} className="nav-link-item">Log out</Link>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
